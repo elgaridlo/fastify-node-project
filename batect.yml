@@ -1,6 +1,19 @@
 containers:
   my-container:
     image: alpine:3.11.3
+  # ini nama project bisa terserah
+  buuld-fastify-env:
+    image: node:latest
+    volumes:
+    ## input the project inside folder code
+      - local: .
+        container: /code
+        # cached artinya enggak perlu ngedownload node_modules lagi kalau tidak ada perubahan
+        options: cached
+      - type: cache
+        name: node_modules
+        container: /code/node_modules
+    working_directory: /code
 
 tasks:
   say-hello:
@@ -8,3 +21,22 @@ tasks:
     run:
       container: my-container
       command: echo 'Hello world!'
+
+  #task untuk installing dep of fastify app
+  install-dep:
+    description: Install dependencies needed to build fastify application
+    run: 
+      container: buuld-fastify-env
+      command: npm install
+
+  #task untuk running fastify app
+  start-server:
+    description: Run fastify application
+    run: 
+      environment:
+        PORT: 8080
+      container: buuld-fastify-env
+      command: npm run start
+      ports:
+        # external : docker port
+        - 4000:8080
