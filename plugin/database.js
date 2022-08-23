@@ -1,5 +1,5 @@
 const fp = require('fastify-plugin');
-const pgp = require('pg-promise');
+const pgp = require('pg-promise')();
 const applyMigration = require('./helper/migration');
 
 const db = async (fastify, options, next) => {
