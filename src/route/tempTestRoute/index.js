@@ -1,7 +1,9 @@
 const route = async (fastify) => {
     // get route
     fastify.get('/', async (request, reply) => {
-        
+        const allTest = await fastify.db.query('select * from test')
+
+        reply.code(200).send(allTest)
     })
     
     // post route
@@ -10,7 +12,7 @@ const route = async (fastify) => {
         const { title } = request.body
 
         const id = await fastify.db.one(
-            'INSERT INTO testTable(title) values($1) RETURNING id',
+            'INSERT INTO test(title) values($1) RETURNING id',
             [title]
         )
 
