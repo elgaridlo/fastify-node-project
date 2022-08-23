@@ -1,4 +1,4 @@
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 9000;
 
 const server = require('./src/app')({
   logger: {
@@ -14,7 +14,7 @@ const server = require('./src/app')({
 
 const start = async () => {
   try {
-    await server.listen(PORT, '0.0.0.0');
+    await server.listen(PORT, '127.0.0.1');
   } catch (error) {
     server.log.error(error);
     process.exit(1);
