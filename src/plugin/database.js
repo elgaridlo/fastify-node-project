@@ -1,3 +1,4 @@
+require('dotenv').config()
 const fp = require('fastify-plugin');
 const pgp = require('pg-promise')();
 const applyMigration = require('./helper/migration');
