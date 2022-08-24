@@ -42,6 +42,11 @@ containers:
       POSTGRES_DB: db
 
 tasks:
+  start-test-db:
+    description: start test database
+    run:
+      container: db-test
+
   say-hello:
     description: Say hello to the nice person reading the Batect documentation
     run:
@@ -78,7 +83,7 @@ tasks:
       container: build-fastify-env
       environment:
         PORT: 8080
-        # @db-test is name of the database
+        # @db-test is name of the container and db is name of db
         POSTGRES_URI: postgres://app:password@db-test:5432/db
       command: npm run test:watch
     dependencies:
