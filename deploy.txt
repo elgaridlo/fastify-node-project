@@ -11,3 +11,8 @@ Deploy on heroku - manually
 
     step 4: - Run docker image on heroku
         command: - heroku container:release -a fastify-udemy
+        add variable ke heroku config variable
+        - DATABASE_URL : postgres://fkbftfocjywmwe:999e0fa37bbacc81561f5f14e77b7bcb6e73cbfd6881d0270414b77618788493@ec2-107-23-76-12.compute-1.amazonaws.com:5432/dvf5i5iv3pf9j
+        - POSTGRES_URI: postgres://fkbftfocjywmwe:999e0fa37bbacc81561f5f14e77b7bcb6e73cbfd6881d0270414b77618788493@ec2-107-23-76-12.compute-1.amazonaws.com:5432/dvf5i5iv3pf9j
+                    PGSSLMODE ini untuk meng-ignore permintaan certificate dari Postgres heroku
+        - PGSSLMODE: no-verify
