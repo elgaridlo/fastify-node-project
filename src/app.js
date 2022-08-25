@@ -13,6 +13,7 @@ const build = (opts = {}) => {
   // register route
   app.register(testRoute, { prefix: 'api/v1/test' });
 
+  // ini bisa dihapus sih tp jangan juga
   app.get('/', (req, reply) => {
     reply.code(200).send({ hello: 'world!' });
   });
