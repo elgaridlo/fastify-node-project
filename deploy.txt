@@ -16,3 +16,8 @@ Deploy on heroku - manually
         - POSTGRES_URI: postgres://fkbftfocjywmwe:999e0fa37bbacc81561f5f14e77b7bcb6e73cbfd6881d0270414b77618788493@ec2-107-23-76-12.compute-1.amazonaws.com:5432/dvf5i5iv3pf9j
                     PGSSLMODE ini untuk meng-ignore permintaan certificate dari Postgres heroku
         - PGSSLMODE: no-verify
+
+    for M1 Mac user step: ada perpedaan architecture yang membuat docker kita enggak jalan di heroku. Jadi kita harus merubahnya ke linux friendly haha 
+        first command: docker buildx build --load --platform linux/amd64 -t registry.heroku.com/fastify-udemy/web .
+        second command: docker push registry.heroku.com/fastify-udemy/web:latest 
+        third command: heroku container:release -a fastify-udemy
