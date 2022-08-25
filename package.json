@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "CI=true jest --watchAll --runInBand --detectOpenHandles",
+    "test": "CI=true jest --watchAll=false --runInBand --detectOpenHandles",
     "test:watch": "jest --watchAll --detectOpenHandles --runInBand",
     "start": "nodemon server.js",
     "lint:fix": "eslint '**/*.js' --fix",

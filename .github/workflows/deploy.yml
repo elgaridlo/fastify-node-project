@@ -1,0 +1,28 @@
+name: Fastify Project Udemy
+
+on: 
+  # Kalau ada yang push ke branch master maka job akan dieksekusi 
+  push: 
+    branches: [master]
+  # Kalau ada yang melakukan pull request ke branch master maka job akan dieksekusi 
+  pull_request:
+    branches: [master]
+
+jobs:
+  # ini nama yang bisa diganti ganti
+  build:
+    runs-on: ubuntu-latest
+
+  # steps itu action apa aja yang mau dijalankan 
+    steps:
+      # untuk melakukan checkout codebase kita ke CI branch
+      - uses: actions/checkout@v2
+
+      - name: Install Fastify Dependencies
+        run: ./batect install-dep
+
+      - name: Run testcase
+        run: ./batect test-ci
+
+      - name: Perform Linting
+        run: ./batect lint
