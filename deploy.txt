@@ -1,0 +1,13 @@
+Deploy on heroku - manually
+
+    step1: - heroku login
+
+    step2: - Login to heroku container registry and push docker image to registry
+        command: - heroku container:login
+    
+    step3: - Build docker image and push to heroku container registry
+        command: - heroku container:push -a fastify-udemy web
+        ini akan fail karena heroku mencari docker file untuk menjalankan command ini
+
+    step 4: - Run docker image on heroku
+        command: - heroku container:release -a fastify-udemy

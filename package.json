@@ -7,6 +7,7 @@
     "test": "CI=true jest --watchAll=false --runInBand --detectOpenHandles",
     "test:watch": "jest --watchAll --detectOpenHandles --runInBand",
     "start": "nodemon server.js",
+    "start-prod": "node server.js",
     "lint:fix": "eslint '**/*.js' --fix",
     "lint": "eslint '**/*.js'",
     "format": "prettier --write '**/*.js'"
