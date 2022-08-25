@@ -1,14 +1,14 @@
 const tempService = require('../../service/temp.service')
-const {postRequestBody, postReponse} = require('./temp.schema')
+const {postRequestBody, postReponse, getResponseBody} = require('./temp.schema')
 
 const route = async (fastify) => {
     const {getAll, save} = tempService(fastify)
 
     // get route
-    fastify.get('/', async (request, reply) => {
+    fastify.get('/', { schema: { response: getResponseBody } } , async (request, reply) => {
         const allTest = await getAll()
 
-        reply.code(200).send(allTest)
+        reply.code(200).send({temps: allTest})
     })
     
     // post route

@@ -10,6 +10,32 @@ const postRequestBody = {
         }
     }
 }
+
+// dont return array but return object biar bisa ditambahin property lain
+const getResponseBody = {
+    200: {
+        type: 'object',
+        required: ['temps'],
+        properties: {
+            temps: {
+                type: 'array',
+                items: {
+                    type: 'object',
+                    required: ['title', 'id'],
+                    properties: {
+                        id: {
+                            type: 'string',
+                        },
+                        title: {
+                            type: 'string',
+                            minLength: 10
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 // Validasi Response Schema
 const postReponse = {
     201: {
@@ -23,5 +49,6 @@ const postReponse = {
 
 module.exports = {
     postRequestBody,
-    postReponse
+    postReponse,
+    getResponseBody
 }
