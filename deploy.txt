@@ -10,7 +10,7 @@ Deploy on heroku - manually
         ini akan fail karena heroku mencari docker file untuk menjalankan command ini
 
     step 4: - Run docker image on heroku
-        command: - heroku container:release -a fastify-udemy
+        command: - heroku container:release -a fastify-udemy web
         add variable ke heroku config variable
         - DATABASE_URL : postgres://fkbftfocjywmwe:999e0fa37bbacc81561f5f14e77b7bcb6e73cbfd6881d0270414b77618788493@ec2-107-23-76-12.compute-1.amazonaws.com:5432/dvf5i5iv3pf9j
         - POSTGRES_URI: postgres://fkbftfocjywmwe:999e0fa37bbacc81561f5f14e77b7bcb6e73cbfd6881d0270414b77618788493@ec2-107-23-76-12.compute-1.amazonaws.com:5432/dvf5i5iv3pf9j
@@ -20,7 +20,7 @@ Deploy on heroku - manually
     for M1 Mac user step: ada perpedaan architecture yang membuat docker kita enggak jalan di heroku. Jadi kita harus merubahnya ke linux friendly haha 
         first command: docker buildx build --load --platform linux/amd64 -t registry.heroku.com/fastify-udemy/web .
         second command: docker push registry.heroku.com/fastify-udemy/web:latest 
-        third command: heroku container:release -a fastify-udemy
+        third command: heroku container:release -a fastify-udemy web
 
 
 Deploy to heroku with github action - CD 

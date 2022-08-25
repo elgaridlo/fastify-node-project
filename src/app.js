@@ -15,7 +15,7 @@ const build = (opts = {}) => {
 
   // ini bisa dihapus sih tp jangan juga
   app.get('/', (req, reply) => {
-    reply.code(200).send({ hello: 'world!' });
+    reply.code(200).send({ hello: 'world - test!' });
   });
 
   return app;

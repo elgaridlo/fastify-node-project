@@ -22,6 +22,6 @@ describe('Root route', () => {
     expect(res.statusCode).toBe(200);
 
     // toEqual untuk object
-    expect(res.json()).toEqual({ hello: 'world!' });
+    expect(res.json()).toEqual({ hello: 'world - test!' });
   });
 });
