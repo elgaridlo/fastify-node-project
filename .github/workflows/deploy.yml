@@ -12,8 +12,7 @@ jobs:
   # ini nama yang bisa diganti ganti
   build:
     runs-on: ubuntu-latest
-
-  # steps itu action apa aja yang mau dijalankan 
+    # steps itu action apa aja yang mau dijalankan 
     steps:
       # untuk melakukan checkout codebase kita ke CI branch
       - uses: actions/checkout@v2
@@ -26,3 +25,26 @@ jobs:
 
       - name: Perform Linting
         run: ./batect lint
+
+  deploy:
+    needs: build
+    runs-on: 'ubuntu-latest'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Login to heroku container registry
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+
+      - name: Build docker image and push to heroku registry
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push -a fastify-udemy web
+
+      - name: Run docker image on heroku
+        env: 
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release -a fastify-udemy
+          

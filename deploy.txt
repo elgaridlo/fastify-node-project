@@ -21,3 +21,19 @@ Deploy on heroku - manually
         first command: docker buildx build --load --platform linux/amd64 -t registry.heroku.com/fastify-udemy/web .
         second command: docker push registry.heroku.com/fastify-udemy/web:latest 
         third command: heroku container:release -a fastify-udemy
+
+
+Deploy to heroku with github action - CD 
+    step1: - command: heroku authorizations:create
+        result: 
+            Creating OAuth Authorization... done
+            Client:      <none>
+            ID:          ccca3c36-70dd-4656-9bd3-bf829f391c01
+            Description: Long-lived user authorization
+            Scope:       global
+            Token:       2c1ec6ac-22ea-4072-96d3-d97593158357
+            Updated at:  date
+        masukkan token ke github secret action
+        
+    for revoke auth from token:
+       heroku authorizations:revoke ID
