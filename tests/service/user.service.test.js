@@ -27,4 +27,44 @@ describe('user service', () => {
         expect(userId).toEqual('user_uuid')
         expect(saveUser).toHaveBeenCalledWith(user)
     })
+
+    it('should return user when userId exist', async() => {
+        const {getUserById} = UserService({})
+        getUserByIdDao.mockReturnValueOnce({
+            id: 'uuid',
+            firstName: 'peter',
+            middleName: 'middlename',
+            lastName: 'smith',
+            password: 'password',
+            email: 'email'
+        })
+
+
+        const user = await getUserById('user_uuid')
+
+        expect(user).toEqual({
+            id: 'uuid',
+            username: 'peter middlename smith',
+            email: 'email'
+        })
+    })
+
+    it('should return user with correct when user exist', async() => {
+        const {getUserById} = UserService({})
+        getUserByIdDao.mockReturnValueOnce({
+            id: 'uuid',
+            firstName: 'peter',
+            password: 'password',
+            email: 'email'
+        })
+
+
+        const user = await getUserById('user_uuid')
+
+        expect(user).toEqual({
+            id: 'uuid',
+            username: 'peter',
+            email: 'email'
+        })
+    })
 })
