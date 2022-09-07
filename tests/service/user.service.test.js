@@ -1,4 +1,4 @@
-const Fastify = require('fastify')
+// const Fastify = require('fastify')
 const UserService = require('../../src/service/user.service')
 const UserRepository = require('../../src/dao/user.dao')
 
@@ -16,10 +16,11 @@ describe('user service', () => {
     })
     it('should save user when user data is valid', async () => {
         const { createUser } = UserService({})
+        // mock return value ini seperti memanipulasi return
         saveUser.mockReturnValueOnce('user_uuid')
         const user = {
-            firstName: 'Peter',
-            lastName: 'Smith',
+            firstName: 'peter',
+            lastName: 'smith',
             password: 'password',
             email: 'email'        
         }
@@ -36,7 +37,10 @@ describe('user service', () => {
             middleName: 'middlename',
             lastName: 'smith',
             password: 'password',
-            email: 'email'
+            email: 'email',
+            created_at: '2021-08-07 13:46:33.934071+00',
+            updated_at: '2021-08-07 13:46:33.934071+00',
+            version: '1'
         })
 
 
@@ -45,7 +49,10 @@ describe('user service', () => {
         expect(user).toEqual({
             id: 'uuid',
             username: 'peter middlename smith',
-            email: 'email'
+            email: 'email',
+            createdAt: '07/08/2021',
+            updatedAt: '07/08/2021',
+            version: '1'
         })
     })
 
@@ -55,16 +62,21 @@ describe('user service', () => {
             id: 'uuid',
             firstName: 'peter',
             password: 'password',
-            email: 'email'
+            email: 'email',
+            created_at: '2021-08-07 13:46:33.934071+00',
+            updated_at: '2021-08-07 13:46:33.934071+00',
+            version: 'some uuid'
         })
-
 
         const user = await getUserById('user_uuid')
 
         expect(user).toEqual({
             id: 'uuid',
             username: 'peter',
-            email: 'email'
+            email: 'email',
+            createdAt: '07/08/2021',
+            updatedAt: '07/08/2021',
+            version: 'some uuid'
         })
     })
 })
