@@ -1,4 +1,5 @@
 const UserService = require('../../service/user.service')
+const { postRequestBody, postResponseBody } = require('./user.schema')
 
 const userRoute = async(fastify) => {
      const { getUserById, createUser } = UserService(fastify)
@@ -7,7 +8,7 @@ const userRoute = async(fastify) => {
         
      })
 
-     fastify.post('/', async(request, reply) => {
+     fastify.post('/', {schema: {body: postRequestBody, response: postResponseBody}}, async(request, reply) => {
         fastify.log.info('creating user')
 
         try {
