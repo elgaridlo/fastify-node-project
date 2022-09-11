@@ -4,10 +4,10 @@ const UserRepository = require('../dao/user.dao')
 const userService = (fastify) => {
     // Jangan tulis command, buatlah kodemu lebih mudah dipahami dan itu lah clean code
     // get user Id
-    const userRepository = UserRepository(fastify)
+    const userRepository = UserRepository(fastify.db)
     const getUserById = async (userId) => {
         const user = await userRepository.getUserById(userId)
-        const username = [user.firstName, user.middleName, user.lastName]
+        const username = [user.first_name, user.middle_name, user.last_name]
         .filter(name => name !== '')
         .filter(name => name != null)
         .filter(name => name !== undefined)
