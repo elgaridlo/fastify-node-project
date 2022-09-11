@@ -1,11 +1,17 @@
 const UserService = require('../../service/user.service')
-const { postRequestBody, postResponseBody } = require('./user.schema')
+const { postRequestBody, postResponseBody, getRequestparams, getResponseBody } = require('./user.schema')
 
 const userRoute = async(fastify) => {
      const { getUserById, createUser } = UserService(fastify)
 
-     fastify.get('/:userId', async(request, reply) => {
-        
+     fastify.get('/:userId', {schema: {params: getRequestparams, response: getResponseBody}}, async(request, reply) => {
+        const { userId } = request.params;
+        try {
+            const user = await getUserById(userId)
+            reply.code(200).send(user)
+        } catch (error) {
+            reply.code(400).send(error)
+        }
      })
 
      fastify.post('/', {schema: {body: postRequestBody, response: postResponseBody}}, async(request, reply) => {

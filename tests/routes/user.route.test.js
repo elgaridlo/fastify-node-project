@@ -108,4 +108,52 @@ describe('user route', () => {
 
         expect(res.statusCode).toBe(400)
     })
+
+    it('should return 200 when user exist', async() =>{
+       getUserById.mockImplementation(() => ({
+        id: '5b101c75-33d6-472e-b6e0-ea4bcddf402b',
+        username: 'peter',
+        email: 'email@gmail.com',
+        createdAt: '08/09/2020',
+        updatedAt: '08/09/2021',
+        version: 'ccd4b196-813d-4dc2-9df0-7fa6c4825e74'
+       }))
+        const res = await app.inject({
+            method: 'GET',
+            url: 'api/v1/users/5b101c75-33d6-472e-b6e0-ea4bcddf402b',
+            payload: {
+                email: 'email@gmail.com'
+            }
+        })
+
+        expect(res.statusCode).toBe(200)
+        expect(res.json()).toEqual({
+            id: '5b101c75-33d6-472e-b6e0-ea4bcddf402b',
+            username: 'peter',
+            email: 'email@gmail.com',
+            createdAt: '08/09/2020',
+            updatedAt: '08/09/2021',
+            version: 'ccd4b196-813d-4dc2-9df0-7fa6c4825e74'
+        })
+    })
+
+    it('should return 400 when userid not valid', async() =>{
+        getUserById.mockImplementation(() => ({
+         id: '5b101c75-33d6-472e-b6e0-ea4bcddf402b',
+         username: 'peter',
+         email: 'email@gmail.com',
+         createdAt: '08/09/2020',
+         updatedAt: '08/09/2021',
+         version: 'ccd4b196-813d-4dc2-9df0-7fa6c4825e74'
+        }))
+         const res = await app.inject({
+             method: 'GET',
+             url: 'api/v1/users/somevaliduuid',
+             payload: {
+                 email: 'email@gmail.com'
+             }
+         })
+ 
+         expect(res.statusCode).toBe(400)
+     })
 })

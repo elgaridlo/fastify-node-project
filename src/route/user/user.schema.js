@@ -50,7 +50,48 @@ const postResponseBody = {
     }
 }
 
+const getRequestparams = {
+    type: 'object',
+    properties: {
+        userId: {
+            type: 'string',
+            format: 'uuid'
+        }
+    }
+}
+
+const getResponseBody = {
+    200: {
+        type: 'object',
+        required: ['id','username','email','createdAt','updatedAt','version'],
+        properties: {
+            id: {
+                type: 'string',
+                format: 'uuid'
+            },
+            username: {
+                type:'string'
+            },
+            email: {
+                type:'string',
+                format: 'email'
+            },
+            createdAt: {
+                type:'string'
+            },
+            updatedAt: {
+                type:'string'
+            },
+            version: {
+                type: 'string'
+            }
+        }
+    }
+}
+
 module.exports = {
     postRequestBody,
-    postResponseBody
+    postResponseBody,
+    getRequestparams,
+    getResponseBody
 }
